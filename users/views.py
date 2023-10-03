@@ -1,5 +1,7 @@
+from django.urls import path
 from django.shortcuts import render
-from django.http import HttpResponse
 
 def cadastre(request):
-    return render(request, 'users/cadastre.html')
+    if request.method == "GET":
+        return render(request, 'cadastre.html')
+
