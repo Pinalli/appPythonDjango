@@ -16,9 +16,11 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
 
         if password != confirm_password:
+              messages.add_message(request, constants.ERROR, 'Passwords not equals')
               return redirect('/users/register')
         
         if len(password) < 6:
+              messages.add_message(request, constants.ERROR, 'Your password must be at least 6 characters long')
               return redirect('/users/register')
       
         try:
@@ -29,7 +31,22 @@ def register(request):
                 password=password, 
                 email=email
              )
-        except Exception as e:           
+            messages.add_message(request, constants.SUCCESS, 'Registered successfully')
+        except Exception as e:
+            messages.add_message(request, constants.ERROR, 'Error registering user, contact the administrator')           
             return redirect('/users/register')
         return  redirect('/users/register')
 
+def login(request):
+    if request.method == 'GET':       
+         return render(request, 'login.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username')        
+        password = request.POST.get('password')        
+        user = User.objects.filter(username=username, password=password).first()
+        if user:
+            messages.add_message(request, constants.SUCCESS, 'Logged in successfully')
+            return redirect('/users/login')
+        else:
+            messages.add_message(request, constants.ERROR, 'Incorrect username or password')
+            return redirect('/users/login')
