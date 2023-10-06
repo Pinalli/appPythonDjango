@@ -1,0 +1,47 @@
+{% extends "bases/base.html" %} 
+{% load static %} 
+
+{% block 'head' %} 
+    <link href="{% static 'exams/css/exam.css' %}" rel="stylesheet" />
+{% endblock 'head' %} 
+{% block 'content' %}
+<br />
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <h3 class="font-destaque">Request Exams</h3>
+      <form action="" method="POST">
+        <label for="">
+            Select the exams to take</label>
+        <select class="select form-control bg-select" multiple name="exams">
+          <option class="opt" value="">Exam 1</option>
+        </select>
+        <br />
+        <input
+          type="submit"
+          class="btn-default tamanho-2"
+          name="last_nnme"
+          value="Request_exams"
+        />
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md card">
+      <div style="font-size: 20px; font-weight: bold">
+        <img src="{% static 'exames/img/check.png' %}" />
+        Exam 1
+        <span class="previa-preco"> R$ 30 </span>
+      </div>
+      <hr style="color: white" />
+      <div><label>Amount: </label><label class="preview-price">R$ 30</label></div>
+      <br />
+      <h5>Date: 08 de Setembro</h5>
+      <br />
+      <form action="" method="POST">
+        <button class="btn-secundario">Close Order</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock 'content' %}
